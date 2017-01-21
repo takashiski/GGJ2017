@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2015
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GGJ2017LED.Plugins", "GGJ2017LED.Plugins.csproj", "{910D58C3-90CF-8DE5-24A2-7B66B797168D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GGJ2017LED", "GGJ2017LED.csproj", "{DB42D608-FD90-7827-A2B0-48D385E6FDDC}"
 EndProject
 Global
@@ -11,10 +9,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{910D58C3-90CF-8DE5-24A2-7B66B797168D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{910D58C3-90CF-8DE5-24A2-7B66B797168D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{910D58C3-90CF-8DE5-24A2-7B66B797168D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{910D58C3-90CF-8DE5-24A2-7B66B797168D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DB42D608-FD90-7827-A2B0-48D385E6FDDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DB42D608-FD90-7827-A2B0-48D385E6FDDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB42D608-FD90-7827-A2B0-48D385E6FDDC}.Release|Any CPU.ActiveCfg = Release|Any CPU

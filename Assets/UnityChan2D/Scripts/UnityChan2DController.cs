@@ -53,13 +53,11 @@ public class UnityChan2DController : MonoBehaviour
     {
         if (m_state != State.Damaged)
         {
-            float x = Input.GetAxis("Horizontal");
-            bool jump = Input.GetButtonDown("Jump");
-            Move(x, jump);
+            Move(0f);
         }
     }
 
-    void Move(float move, bool jump)
+    void Move(float move)
     {
         if (Mathf.Abs(move) > 0)
         {
@@ -72,13 +70,6 @@ public class UnityChan2DController : MonoBehaviour
         m_animator.SetFloat("Horizontal", move);
         m_animator.SetFloat("Vertical", m_rigidbody2D.velocity.y);
         m_animator.SetBool("isGround", m_isGround);
-
-        if (jump && m_isGround)
-        {
-            m_animator.SetTrigger("Jump");
-            SendMessage("Jump", SendMessageOptions.DontRequireReceiver);
-            m_rigidbody2D.AddForce(Vector2.up * jumpPower);
-        }
     }
 
     void FixedUpdate()
@@ -107,7 +98,7 @@ public class UnityChan2DController : MonoBehaviour
 
         SendMessage("OnDamage", SendMessageOptions.DontRequireReceiver);
 
-        m_rigidbody2D.velocity = new Vector2(transform.right.x * backwardForce.x, transform.up.y * backwardForce.y);
+        //m_rigidbody2D.velocity = new Vector2(transform.right.x * backwardForce.x, transform.up.y * backwardForce.y);
 
         yield return new WaitForSeconds(.2f);
 

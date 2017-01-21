@@ -52,9 +52,6 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
@@ -70,9 +67,6 @@
     <Reference Include="UnityEngine.HoloLens">
       <HintPath>Library\UnityAssemblies\UnityEngine.HoloLens.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Purchasing">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Purchasing.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.VR">
       <HintPath>Library\UnityAssemblies\UnityEngine.VR.dll</HintPath>
     </Reference>
@@ -82,28 +76,12 @@
     <Reference Include="Mono.Cecil">
       <HintPath>Library\UnityAssemblies\Mono.Cecil.dll</HintPath>
     </Reference>
-    <Reference Include="System.Drawing">
-      <HintPath>Assets\Plugins\System.Drawing.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Windows.Forms">
-      <HintPath>Assets\Plugins\System.Windows.Forms.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="GGJ2017LED.Plugins.csproj">
-      <Project>{910D58C3-90CF-8DE5-24A2-7B66B797168D}</Project>
-      <Name>GGJ2017LED.Plugins</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Assets\ScreenCursor_ExampleScene (Deletable)\Example 1 Scene\Csharp_Example.cs" />
-    <Compile Include="Assets\ScreenCursor_ExampleScene (Deletable)\Example 1 Scene\JoyStick_Example.cs" />
-    <Compile Include="Assets\ScreenCursor_ExampleScene (Deletable)\Example 1 Scene\ScrollWheel_Example.cs" />
-    <Compile Include="Assets\ScreenCursor_ExampleScene (Deletable)\Example 2 Scene\Canvas_Example.cs" />
     <Compile Include="Assets\UnityChan2D\Demo\Scripts\AudioSourceController.cs" />
     <Compile Include="Assets\UnityChan2D\Demo\Scripts\BlockController.cs" />
     <Compile Include="Assets\UnityChan2D\Demo\Scripts\BrokenBlockController.cs" />
-    <Compile Include="Assets\UnityChan2D\Demo\Scripts\CameraController.cs" />
+    <Compile Include="Assets\UnityChan2D\Demo\Scripts\CameraControllerUnitychan.cs" />
     <Compile Include="Assets\UnityChan2D\Demo\Scripts\CoinController.cs" />
     <Compile Include="Assets\UnityChan2D\Demo\Scripts\Demo.cs" />
     <Compile Include="Assets\UnityChan2D\Demo\Scripts\IntroCameraController.cs" />
@@ -114,11 +92,11 @@
     <Compile Include="Assets\UnityChan2D\Demo\Scripts\StartController.cs" />
     <Compile Include="Assets\UnityChan2D\Demo\Scripts\TimeController.cs" />
     <Compile Include="Assets\UnityChan2D\Scripts\UnityChan2DController.cs" />
+    <Compile Include="Assets\syyama\Scripts\CameraController.cs" />
+    <Compile Include="Assets\syyama\Scripts\Enemy1.cs" />
+    <Compile Include="Assets\syyama\Scripts\EnemyController.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\ScreenCursor_ExampleScene (Deletable)\Installation Guide NEW.txt" />
-    <None Include="Assets\ScreenCursor_ExampleScene (Deletable)\Installation Guide OLD.txt" />
-    <None Include="Assets\ScreenCursor_ExampleScene (Deletable)\Read_Me.txt" />
     <None Include="Assets\UnityChan2D\Demo\Sounds\Voice\unity-chan_voice_list.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
