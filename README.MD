@@ -6,4 +6,5 @@
 
 ## 配布ライセンス
 ![ユニティちゃんライセンス](http://unity-chan.com/images/imageLicenseLogo.png)
+
 このアセットは、『ユニティちゃんライセンス』で提供されています。
