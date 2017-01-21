@@ -23,7 +23,7 @@ public class StartButton : MonoBehaviour
 
         foreach(var enemy1 in enemy1s)
         {
-            enemies.Add(new Enemy(0, 1, (int)enemy1.transform.position.x, (int)enemy1.transform.position.x, 1));
+            enemies.Add(new Enemy(0, 0, 1, (int)enemy1.transform.position.x, (int)enemy1.transform.position.x, 1));
         }
 
         serialHandler.Write("testtesttest");
