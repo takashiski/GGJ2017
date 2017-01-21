@@ -2,7 +2,8 @@
 このプロジェクトは Global Game Jam 2017 のプロジェクト用意されたものです。
 
 ## 著作者
-syyama
+チーム名未定
 
 ## 配布ライセンス
-MIT Licenseで公開します
+![ユニティちゃんライセンス](http://unity-chan.com/images/imageLicenseLogo.png)
+このアセットは、『ユニティちゃんライセンス』で提供されています。
