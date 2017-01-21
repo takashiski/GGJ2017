@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/syyama/Scenes/Main.unity
+- path: Assets/syyama/Scenes/SerialTest.unity
   isLoaded: 1
   isActive: 1

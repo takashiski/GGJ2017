@@ -32,12 +32,7 @@ public class CameraControllerUnitychan : MonoBehaviour
                 m_camera.transform.position = new Vector3(target.position.x, pos.y, pos.z);
             }
         }
-
-        if (stopPosition.position.x - right.x < 0)
-        {
-            StartCoroutine(INTERNAL_Clear());
-            enabled = false;
-        }
+        
     }
 
     private IEnumerator INTERNAL_Clear()

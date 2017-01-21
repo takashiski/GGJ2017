@@ -30,7 +30,7 @@ public class CameraController : MonoBehaviour {
         }
 
         // 入力の受付
-        float x = Input.GetAxis("Horizontal");
+        var x = Input.GetAxis("Horizontal");
         
         var pos = m_camera.transform.position;
 
