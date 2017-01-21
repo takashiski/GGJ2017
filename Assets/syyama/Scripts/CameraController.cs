@@ -9,8 +9,10 @@ public class CameraController : MonoBehaviour {
     private Camera m_camera;
 
     //これ以上移動しないカメラの位置
-    private float cameraStartPos = -10;
-    private float cameraEndPos = 100;
+    private float cameraStartPos = 0f;
+    private float cameraEndPos = 150f;
+
+    private bool initCamera = false;
 
     void Awake()
     {
@@ -18,7 +20,14 @@ public class CameraController : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update() {
+
+        // カメラの初期処理
+        if(!initCamera)
+        {
+            InitCamera();
+            return;
+        }
 
         // 入力の受付
         float x = Input.GetAxis("Horizontal");
@@ -39,6 +48,23 @@ public class CameraController : MonoBehaviour {
         if (pos.x > cameraEndPos)
         {
             m_camera.transform.position = new Vector3(cameraEndPos, pos.y, pos.z);
+        }
+    }
+
+    /// <summary>
+    /// カメラを初期位置にもっていく
+    /// </summary>
+    void InitCamera()
+    {
+        var pos = m_camera.transform.position;
+
+        if (pos.x < 80f)
+        {
+            m_camera.transform.position = new Vector3(pos.x + 0.4f, pos.y, pos.z);
+        }
+        else
+        {
+            initCamera = true;
         }
     }
 }

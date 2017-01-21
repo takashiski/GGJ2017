@@ -8,6 +8,9 @@ public class EnemyController : MonoBehaviour {
     // 敵1
     public GameObject enemy1;
 
+    // 敵の初期の高さ
+    public float defaultPosY = -4.5f;
+ 
 	// Use this for initialization
 	void Start () {
 		
@@ -19,14 +22,34 @@ public class EnemyController : MonoBehaviour {
         // 敵を配置する処理
         if (Input.GetMouseButtonDown(0))
         {
-            // Vector3でマウス位置座標を取得する
-            Vector3 position = Input.mousePosition;
+            // マウス位置座標を取得しスクリーン座標からワールド座標に変換する
+            Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            // マウス位置座標をスクリーン座標からワールド座標に変換する
-            Vector3 screenToWorldPointPosition = Camera.main.ScreenToWorldPoint(position);
+            // 敵オブジェクトを配置するポジション
+            float setPos = (float)Math.Round(position.x);
 
-            // 敵オブジェクトを配置する
-            Instantiate(enemy1, new Vector3((float)Math.Round(screenToWorldPointPosition.x), -4.5f, 0f), transform.rotation);
+            // 70～143までの間に配置可能
+            if (setPos < 70.0f && setPos < 144.0f)
+            {
+                return;
+            }
+
+            if (position.y < -2.0f)
+            {
+                // 重複してゲームオブジェクトを配置しないようにする
+                Enemy1[] enemy1s = FindObjectsOfType<Enemy1>();
+
+                // 既存のオブジェクトを確認する
+                foreach (Enemy1 enemy1 in enemy1s)
+                {
+                    if (setPos == enemy1.gameObject.transform.position.x)
+                    {
+                        return;
+                    }
+                }
+                // 敵オブジェクトを配置する
+                Instantiate(enemy1, new Vector3((float)Math.Round(position.x), defaultPosY, 0f), transform.rotation);
+            }
         }
     }
 }

@@ -453,7 +453,11 @@ PlayerSettings:
   XboxOnePersistentLocalStorageSize: 0
   vrEditorSettings: {}
   cloudServicesEnabled:
-    UNet: 1
+    Build: 0
+    Collab: 0
+    ErrorHub: 0
+    Hub: 0
+    UNet: 0
   cloudProjectId: d2282580-d006-43c8-89d5-7a9deb83543e
   projectName: GGJ2017LED
   organizationId: tewst

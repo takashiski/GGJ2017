@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy1 : MonoBehaviour {
 
-    public float maxSpeed = 10f;
+    public float maxSpeed = 0f;
 
     public float destroyPos = -30f;
     private Rigidbody2D m_rigidbody2D;
@@ -14,7 +14,7 @@ public class Enemy1 : MonoBehaviour {
     {
         Awake();
 
-        maxSpeed = 10f;
+        maxSpeed = 0f;
     }
 
     void Awake()
@@ -30,7 +30,6 @@ public class Enemy1 : MonoBehaviour {
         if(gameObject.transform.position.x <= destroyPos)
         {
             Destroy(gameObject);
-
         }
     }
 }
