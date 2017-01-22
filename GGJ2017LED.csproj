@@ -96,6 +96,8 @@
     <Compile Include="Assets\syyama\Scripts\SerialHandler.cs" />
     <Compile Include="Assets\syyama\Scripts\SerialReciever.cs" />
     <Compile Include="Assets\syyama\Scripts\SerialTest.cs" />
+    <Compile Include="Assets\syyama\Scripts\StageClearingButton.cs" />
+    <Compile Include="Assets\syyama\Scripts\StageController.cs" />
     <Compile Include="Assets\syyama\Scripts\StartButton.cs" />
   </ItemGroup>
   <ItemGroup>

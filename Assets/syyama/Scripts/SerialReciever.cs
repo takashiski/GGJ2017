@@ -1,14 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// シリアルで情報を受信するクラス
+/// </summary>
 public class SerialReciever : MonoBehaviour {
 
     public SerialHandler serialHandler;
 
     void Start()
     {
-        //serialHandler.OnDataReceived += OnDataReceived;
+        serialHandler.OnDataReceived += OnDataReceived;
     }
 
     void OnDataReceived(string message)

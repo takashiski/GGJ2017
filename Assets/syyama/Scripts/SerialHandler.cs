@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.IO.Ports;
 using System.Threading;
 
@@ -64,6 +63,9 @@ public class SerialHandler : MonoBehaviour
         //}
     }
 
+    /// <summary>
+    /// シリアライズを読み込む
+    /// </summary>
     private void Read()
     {
         //while (isRunning_ && serialPort_ != null && serialPort_.IsOpen)
@@ -84,6 +86,10 @@ public class SerialHandler : MonoBehaviour
         //Thread.Sleep(1);
     }
 
+    /// <summary>
+    /// シリアライズを書き込む
+    /// </summary>
+    /// <param name="message"></param>
     public void Write(string message)
     {
         try
@@ -96,6 +102,10 @@ public class SerialHandler : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// シリアライズを書き込む
+    /// </summary>
+    /// <param name="buffer"></param>
     public void Write(byte[] buffer)
     {
         try

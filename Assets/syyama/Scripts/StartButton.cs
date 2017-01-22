@@ -7,13 +7,12 @@ using UnityEngine.UI;
 public class StartButton : MonoBehaviour
 {
     public Text enemyCount;
-    public Text stageCount;
 
     public SerialHandler serialHandler;
 
     public byte length = 64;
 
-    private int stagecnt = 1;
+    public GameObject stageController;
 
     public void OnClick()
     {
@@ -47,8 +46,7 @@ public class StartButton : MonoBehaviour
         serialHandler.Write(sendBytes);
 
         // ステージ名をインクリメント
-        stagecnt++;
-        stageCount.text = stagecnt.ToString();
+        stageController.GetComponent<StageController>().CountUp();
     }
 
     byte[] Enemy2Byte (Enemy enemy)
