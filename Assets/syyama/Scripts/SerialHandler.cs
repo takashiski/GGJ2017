@@ -8,7 +8,7 @@ public class SerialHandler : MonoBehaviour
     public delegate void SerialDataReceivedEventHandler(string message);
     public event SerialDataReceivedEventHandler OnDataReceived;
 
-    public string portName = "COM4";
+    public string portName = "COM3";
     public int baudRate = 9600;
 
     private SerialPort serialPort_;
@@ -25,10 +25,10 @@ public class SerialHandler : MonoBehaviour
 
     void Update()
     {
-        if (isNewMessageReceived_)
-        {
-            OnDataReceived(message_);
-        }
+        //if (isNewMessageReceived_)
+        //{
+        //    OnDataReceived(message_);
+        //}
     }
 
     void OnDestroy()
@@ -51,35 +51,37 @@ public class SerialHandler : MonoBehaviour
     {
         isRunning_ = false;
 
-        if (thread_ != null && thread_.IsAlive)
-        {
-            thread_.Join();
-        }
+        //if (thread_ != null && thread_.IsAlive)
+        //{
+        //thread_.Join();
+        thread_.Abort();
+        //}
 
-        if (serialPort_ != null && serialPort_.IsOpen)
-        {
+        //if (serialPort_ != null && serialPort_.IsOpen)
+        //{
             serialPort_.Close();
             serialPort_.Dispose();
-        }
+        //}
     }
 
     private void Read()
     {
-        while (isRunning_ && serialPort_ != null && serialPort_.IsOpen)
-        {
-            try
-            {
-                //if (serialPort_.BytesToRead > 0)
-                //{
-                    message_ = serialPort_.ReadLine();
-                    isNewMessageReceived_ = true;
-                //}
-            }
-            catch (System.Exception e)
-            {
-                Debug.LogWarning(e.Message);
-            }
-        }
+        //while (isRunning_ && serialPort_ != null && serialPort_.IsOpen)
+        //{
+        //    try
+        //    {
+        //        //if (serialPort_.BytesToRead > 0)
+        //        //{
+        //            message_ = serialPort_.ReadLine();
+        //            isNewMessageReceived_ = true;
+        //        //}
+        //    }
+        //    catch (System.Exception e)
+        //    {
+        //        Debug.LogWarning(e.Message);
+        //    }
+        //}
+        //Thread.Sleep(1);
     }
 
     public void Write(string message)
@@ -87,6 +89,18 @@ public class SerialHandler : MonoBehaviour
         try
         {
             serialPort_.Write(message);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogWarning(e.Message);
+        }
+    }
+
+    public void Write(byte[] buffer)
+    {
+        try
+        {
+            serialPort_.Write(buffer, 0, buffer.Length);
         }
         catch (System.Exception e)
         {

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour {
 
@@ -10,6 +11,8 @@ public class EnemyController : MonoBehaviour {
 
     // 敵の初期の高さ
     public float defaultPosY = -4.5f;
+
+    public Text enemyCount;
 	
 	// Update is called once per frame
 	void Update () {
@@ -31,10 +34,15 @@ public class EnemyController : MonoBehaviour {
 
             if (position.y < -2.0f)
             {
-                // 重複してゲームオブジェクトを配置しないようにする
                 var enemy1s = FindObjectsOfType<Enemy1>();
 
-                // 既存のオブジェクトを確認する
+                // 5体以上配置しないようにする
+                if (enemy1s.Length >= 5)
+                {
+                    return;
+                }
+
+                // 重複してゲームオブジェクトを配置しないようにする
                 foreach (var enemy1 in enemy1s)
                 {
                     if (setPos == enemy1.gameObject.transform.position.x)
@@ -44,6 +52,7 @@ public class EnemyController : MonoBehaviour {
                 }
                 // 敵オブジェクトを配置する
                 Instantiate(enemy1, new Vector3((float)Math.Round(position.x), defaultPosY, 0f), transform.rotation);
+                enemyCount.text = enemy1s.Length+1 + " / 5";
             }
         }
     }
