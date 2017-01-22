@@ -12,6 +12,10 @@ public class EnemyController : MonoBehaviour {
     // 敵の初期の高さ
     public float defaultPosY = -4.5f;
 
+    public float enemyFirstPos = 0.0f;
+    public float enemyLastPos = 128.0f;
+
+
     public Text enemyCount;
 	
 	// Update is called once per frame
@@ -27,7 +31,7 @@ public class EnemyController : MonoBehaviour {
             var setPos = (float)Math.Round(position.x);
 
             // 70～143までの間に配置可能
-            if (setPos < 70.0f && setPos < 144.0f)
+            if (setPos < enemyFirstPos && setPos < enemyLastPos)
             {
                 return;
             }

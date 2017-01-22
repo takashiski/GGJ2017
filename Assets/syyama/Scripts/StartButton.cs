@@ -1,13 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class StartButton : MonoBehaviour
 {
     public Text enemyCount;
+    public Text stageCount;
 
     public SerialHandler serialHandler;
+
+    public byte length = 64;
+
+    private int stagecnt = 1;
 
     public void OnClick()
     {
@@ -16,14 +22,45 @@ public class StartButton : MonoBehaviour
 
         var enemies = new List<Enemy>();
 
-        foreach(var enemy1 in enemy1s)
+        byte cnt = 1;
+        byte[] sendBytes = new byte[3];
+        sendBytes[0] = 200;
+        sendBytes[1] = 250;
+        sendBytes[2] = 0;       // 敵の数
+
+        foreach (var enemy1 in enemy1s)
         {
-            enemies.Add(new Enemy(0, 0, 1, (int)enemy1.transform.position.x, (int)enemy1.transform.position.x, 1));
+            enemies.Add(new Enemy(0, (byte)enemy1.transform.position.x, 1, 0, 144));
             Destroy(enemy1.gameObject);
             enemyCount.text = "0 / 5";
+
+            cnt++;
         }
 
-        byte[] testByte = { 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-        serialHandler.Write(testByte);
+        sendBytes[2] = (byte)((int)cnt - 1);
+
+        foreach (Enemy enemy in enemies)
+        {
+            sendBytes = Enumerable.Concat(sendBytes, Enemy2Byte(enemy)).ToArray();
+        }
+
+        serialHandler.Write(sendBytes);
+
+        // ステージ名をインクリメント
+        stagecnt++;
+        stageCount.text = stagecnt.ToString();
+    }
+
+    byte[] Enemy2Byte (Enemy enemy)
+    {
+        byte[] temp = new byte[5];
+
+        temp[0] = enemy._type;
+        temp[1] = enemy._position;
+        temp[2] = enemy._speed;
+        temp[3] = enemy._range_first;
+        temp[4] = enemy._range_last;
+
+        return temp;
     }
 }

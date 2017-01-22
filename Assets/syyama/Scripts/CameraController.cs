@@ -58,7 +58,7 @@ public class CameraController : MonoBehaviour {
     {
         var pos = m_camera.transform.position;
 
-        if (pos.x < 80f)
+        if (pos.x < 50f)
         {
             m_camera.transform.position = new Vector3(pos.x + 0.4f, pos.y, pos.z);
         }
