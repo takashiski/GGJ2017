@@ -33,9 +33,47 @@ void initEnemies(uint8_t level_num)
     case 2:initLevel2();break;
     case 3:initLevel3();break;
     case 4:initLevel4();break;
+    case 5:finish();break;
     default:break;
   }
 }
+
+void finish()
+{ 
+  int16_t counter = 0;
+  int16_t pos = 0;
+  while(true)
+  {
+    for(int i=0;i<NUMPIXELS;i+=1)
+    {
+      CRGB color;
+      switch(i%13)
+      {
+        case 0:color=CRGB(128,0,0);break;  
+        case 1:color=CRGB(255,0,0);break;  
+        case 2:color=CRGB(255,128,0);break;  
+        case 3:color=CRGB(128,128,0);break;  
+        case 4:color=CRGB(128,255,0);break;  
+        case 5:color=CRGB(0,255,0);break;  
+        case 6:color=CRGB(0,255,128);break;  
+        case 7:color=CRGB(0,128,128);break;  
+        case 8:color=CRGB(0,128,255);break;  
+        case 9:color=CRGB(0,0,255);break;  
+        case 10:color=CRGB(0,0,128);break;  
+        case 11:color=CRGB(128,0,128);break;  
+        case 12:color=CRGB(255,255,255);break;  
+      }
+      pos = i-counter;
+      if(pos<0)pos+=NUMPIXELS;
+      apa102.setColor(pos,color);  
+    }
+    apa102.show();
+    counter += 1;
+    if(counter>NUMPIXELS)counter = 0;
+    delay(5);
+  }  
+}
+
 
 void initLevel0()
 {
@@ -195,11 +233,13 @@ void loop(){
         {
           player.kill();
           //enemies[i].kill();
+//          apa102.setColor(enemies[i].getPos()-2,CRGB::Purple);  
           apa102.setColor(enemies[i].getPos()-1,CRGB::Purple);  
           apa102.setColor(enemies[i].getPos(),CRGB::Purple);  
           apa102.setColor(enemies[i].getPos()+1,CRGB::Purple); 
+//          apa102.setColor(enemies[i].getPos()+2,CRGB::Purple); 
           apa102.show();
-          delay(1000); 
+
         }
         else
         {
@@ -226,6 +266,8 @@ void loop(){
   
     else if(player.died())
     {
+      apa102.show();
+      delay(100);
       int16_t pos = player.getPosition();
       smanager.shotLose();
       for(int i=0;i<NUMPIXELS;i+=1)
