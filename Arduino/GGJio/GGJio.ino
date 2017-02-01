@@ -21,7 +21,7 @@ Enemy enemies[NUMENEMIES];
 SoundManager smanager;
 int8_t stageArray[NUMPIXELS];
 bool serial_flag = false;
-uint8_t level_num=0;
+uint8_t level_num=5;
 
 
 void initEnemies(uint8_t level_num)
@@ -34,6 +34,7 @@ void initEnemies(uint8_t level_num)
     case 3:initLevel3();break;
     case 4:initLevel4();break;
     case 5:finish();break;
+    case 6:apa102.resetColor();break;
     default:break;
   }
 }
@@ -66,6 +67,7 @@ void finish()
       pos = i-counter;
       if(pos<0)pos+=NUMPIXELS;
       apa102.setColor(pos,color);  
+ //     apa102.show();
     }
     apa102.show();
     counter += 1;
@@ -256,7 +258,7 @@ void loop(){
       {
         apa102.setColor(NUMPIXELS-i-1,CRGB::Blue);
         apa102.show();
-        delay(10);
+//        delay(10);
       }
       //serial_flag = true;
       Serial.println(level_num);

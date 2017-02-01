@@ -18,8 +18,10 @@ class APA102Manager
       for(int i=0;i<numpixels;i+=1)
       {
         leds[i] = CRGB::White;  
+
       }
       show();
+      delay(5000);
     };
     ~APA102Manager(){};
     void show(){FastLED.show();}
@@ -28,6 +30,10 @@ class APA102Manager
     {
       leds[pos] = color;  
     };
+    void setEnemy(uint16_t pos){setColor(pos,enemyColor);}
+    void setPlayer(uint16_t pos){setColor(pos,playerColor);}
+    
+    
     void resetColor()
     {
       for(int i=0;i<numpixels;i+=1)
@@ -35,11 +41,14 @@ class APA102Manager
         leds[i] = CRGB::Black;
         //leds[i] = CRGB::White;  
       }  
+      show();
     }
 
   private:
-    struct CRGB leds[432];
+    struct CRGB leds[500];
     uint16_t numpixels;
+    CRGB enemyColor;
+    CRGB playerColor;
 };
 
 #endif

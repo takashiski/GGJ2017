@@ -30,7 +30,7 @@ class Player
     uint8_t getInput()
     {
       mpu6050.getMotion6(&ax,&ay,&az,&gx,&gy,&gz);
-      speed = (int16_t)ay/3000;
+      speed = (int16_t)ay/2000;
       medianQueue.add(fabs(gy));
       atk_range = medianQueue.getMedian();
 //      Serial.println(ay);
@@ -49,7 +49,7 @@ class Player
     }
     bool attack()
     {
-        if(speed>7||speed<-7)
+        if(fabs(ay)>20000)
         {
           atk_flag = true;  
         }

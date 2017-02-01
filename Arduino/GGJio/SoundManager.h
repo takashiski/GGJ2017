@@ -7,12 +7,27 @@ class SoundManager{
 
 public:
   SoundManager(){};
+  void shotSound(uint16_t *sounds, uint16_t len, uint16_t duration)
+  {
+    for(uint16_t i=0;i<len;i+=1)
+    {
+      tone(SPEAKER,sounds[i],duration);  
+      delay(duration);
+    }  
+  }
+  void shotSound(uint16_t *sounds, uint16_t len)
+  {
+    for(uint16_t i=0;i<len;i+=1)
+    {
+      tone(SPEAKER,sounds[i]);  
+    }  
+  }
   void shotAtack(){};
-  void shotForward(int16_t spd){for(int i=0;i<8;i+=1){tone(SPEAKER,forward[i],10*spd);delay(3);}}; 
-  void shotBack(uint16_t spd){for(int i=0;i<8;i+=1){tone(SPEAKER,back[i],10*spd);delay(3);}}
+  void shotForward(int16_t spd){shotSound(forward,8,spd);}; 
+  void shotBack(uint16_t spd){shotSound(back,8,spd);}
   void shotDamage(){tone(SPEAKER,damage,200);}
-  void shotWin(){for(int i=0;i<10;i+=1){tone(SPEAKER,win[i],200);delay(100);}}
-  void shotLose(){for(int i=0;i<8;i+=1){tone(SPEAKER,lose[i],8);delay(100);}}
+  void shotWin(){shotSound(win,10,200);}
+  void shotLose(){shotSound(lose,8,200);}
   void shotATK(){tone(SPEAKER,50,200);}
 
 private:
