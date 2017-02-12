@@ -8,6 +8,7 @@
 #endif
 #include <MPU6050.h>
 #define INTERRUPT_PIN 2
+
 RunningMedian medianQueue(10);
 
 class Player
@@ -30,7 +31,7 @@ class Player
     uint8_t getInput()
     {
       mpu6050.getMotion6(&ax,&ay,&az,&gx,&gy,&gz);
-      speed = (int16_t)ay/2000;
+      speed = fabs(ay)>2000?(int16_t)ay/1000:0;
       medianQueue.add(fabs(gy));
       atk_range = medianQueue.getMedian();
 //      Serial.println(ay);
@@ -49,7 +50,8 @@ class Player
     }
     bool attack()
     {
-        if(fabs(ay)>20000)
+        //if(fabs(ay)>18000)
+        if(fabs(gx)>10000)
         {
           atk_flag = true;  
         }

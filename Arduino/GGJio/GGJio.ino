@@ -10,7 +10,7 @@
 #include "OLEDDebugger.h"
 #include "SoundManager.h"
 
-#define NUMENEMIES 20
+#define NUMENEMIES 5
 #define INTERRUPT_PIN 2
 
 SerialCommand scmd;
@@ -21,7 +21,7 @@ Enemy enemies[NUMENEMIES];
 SoundManager smanager;
 int8_t stageArray[NUMPIXELS];
 bool serial_flag = false;
-uint8_t level_num=5;
+uint8_t level_num=0;
 
 
 void initEnemies(uint8_t level_num)
@@ -34,15 +34,36 @@ void initEnemies(uint8_t level_num)
     case 3:initLevel3();break;
     case 4:initLevel4();break;
     case 5:finish();break;
-    case 6:apa102.resetColor();break;
+    case 6:testBrightness();break;
     default:break;
   }
+}
+
+void testBrightness()
+{
+  
+  uint8_t b = 100;
+  
+  uint8_t i = 0;
+  uint8_t j=72;
+  uint8_t k=144;
+  uint8_t l=216;
+  while(true)
+  {
+    apa102.setRed(i,i++);
+    apa102.setGreen(j,j++);
+    apa102.setBlue(k,k++);
+    apa102.setPurple(l,l++);
+    apa102.show();
+  }
+  
 }
 
 void finish()
 { 
   int16_t counter = 0;
   int16_t pos = 0;
+  uint16_t b = 1<<8;
   while(true)
   {
     for(int i=0;i<NUMPIXELS;i+=1)
@@ -50,26 +71,28 @@ void finish()
       CRGB color;
       switch(i%13)
       {
-        case 0:color=CRGB(128,0,0);break;  
-        case 1:color=CRGB(255,0,0);break;  
-        case 2:color=CRGB(255,128,0);break;  
-        case 3:color=CRGB(128,128,0);break;  
-        case 4:color=CRGB(128,255,0);break;  
-        case 5:color=CRGB(0,255,0);break;  
-        case 6:color=CRGB(0,255,128);break;  
-        case 7:color=CRGB(0,128,128);break;  
-        case 8:color=CRGB(0,128,255);break;  
-        case 9:color=CRGB(0,0,255);break;  
-        case 10:color=CRGB(0,0,128);break;  
-        case 11:color=CRGB(128,0,128);break;  
-        case 12:color=CRGB(255,255,255);break;  
+        case 0:color=CRGB(b/2,0,0);break;  
+        case 1:color=CRGB(b-1,0,0);break;  
+        case 2:color=CRGB(b-1,b/2,0);break;  
+        case 3:color=CRGB(b/2,b/2,0);break;  
+        case 4:color=CRGB(b/2,b-1,0);break;  
+        case 5:color=CRGB(0,b-1,0);break;  
+        case 6:color=CRGB(0,b-1,b/2);break;  
+        case 7:color=CRGB(0,b/2,b/2);break;  
+        case 8:color=CRGB(0,b/2,b-1);break;  
+        case 9:color=CRGB(0,0,b-1);break;  
+        case 10:color=CRGB(b/2,0,b-1);break;  
+        case 11:color=CRGB(b/2,0,b/2);break;  
+        case 12:color=CRGB(b-1,0,b/2);break;  
       }
       pos = i-counter;
       if(pos<0)pos+=NUMPIXELS;
       apa102.setColor(pos,color);  
- //     apa102.show();
+//      apa102.show();
     }
     apa102.show();
+//    b -= 1;
+//    if(b==0)b=256;
     counter += 1;
     if(counter>NUMPIXELS)counter = 0;
     delay(5);
@@ -79,13 +102,7 @@ void finish()
 
 void initLevel0()
 {
-  for(int i=0;i<NUMENEMIES;i+=1)
-  {
-    if(i<10)
-    {
-      enemies[i].update(i*400+700+i*13);  
-    }
-  }
+
 }
 
 void initLevel1()
@@ -142,6 +159,8 @@ void setup()
   randomSeed(analogRead(0));
   initEnemies(level_num++);
   initStage();
+  player.init();
+  Serial.println("inited");
   scmd.addCommand("SEND",getNewEnemies);
   scmd.addDefaultHandler(defaultHandler);
 }
@@ -176,6 +195,7 @@ void initStage()
 }
 
 void loop(){
+  Serial.println(".");
   if(serial_flag)
   {
     scmd.readSerial();  
@@ -192,7 +212,7 @@ void loop(){
 //    Serial.println(player.getInput());
     if(player.attack())
     {
-      smanager.shotATK();
+      smanager.shotAttack();
       int8_t atk_range = player.getAtkRange();
       int16_t pos = player.getPosition();
       for(int i = -atk_range;i<atk_range;i+=1)
@@ -207,7 +227,7 @@ void loop(){
     else
     {  
       int16_t spd = player.move();
-      /*
+      
       if(spd>0)
       {
         smanager.shotForward(spd);
@@ -216,7 +236,7 @@ void loop(){
       {
         smanager.shotBack(spd); 
       }
-      */
+      
       apa102.setColor(player.getPosition(),CRGB::Blue);
       stageArray[player.getPosition()] = -1;
     }
